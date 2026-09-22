@@ -1,0 +1,3118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ignacio Guzmán – Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600&family=Inter:wght@200;300;400;500;600;700&family=Lora:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+
+    <style>
+
+        :root {
+            --bg-color: #F9F9F9;
+            --text-main: rgb(18, 18, 24);
+            --text-muted: rgb(68, 69, 76);
+            --border-color: rgb(224, 226, 230);
+            --surface-color: rgb(237, 238, 241);
+            --page-margin: clamp(24px, 5vw, 70px);
+            --edge-margin: clamp(16px, 5vw, 70px);
+            --content-margin: clamp(24px, 7vw, 120px);
+            --element-gap: clamp(28px, 4vw, 64px);
+            --box-width: 400px;
+            --box-height: 450px;
+            --photo-width: 350px;
+            --photo-height: 450px;
+            --equal-space: max(24px, calc((100vw - (2 * var(--box-width))) / 3));
+            --main-left-space: 14vw;
+            --main-gap: clamp(32px, 6vw, 76px);
+            --main-stage-width: min(1100px, calc(100vw - 48px));
+            --header-edge: 4vw;
+            --header-title-width: 8vw;
+            --header-gap: 58vw;
+            --header-nav-width: 26vw;
+            --card-bottom-space: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            min-width: 320px;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: repeating-linear-gradient(
+                to right,
+                transparent 0,
+                transparent 5px,
+                rgba(210, 210, 210, 0.11) 5px,
+                rgba(210, 210, 210, 0.11) 6px
+            );
+            color: var(--text-main);
+            font-family: "Inter", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+
+            min-height: 100vh;
+        }
+
+        /* =========================
+           CABECERA
+        ========================= */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 20;
+
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            width: 100%;
+            max-width: none;
+
+            margin: 0 auto;
+
+            display: grid;
+            grid-template-columns: var(--header-edge) var(--header-title-width) var(--header-gap) var(--header-nav-width) var(--header-edge);
+            align-items: center;
+
+            padding: 55px 0 25px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            text-decoration: none;
+            color: var(--text-main);
+
+            flex-shrink: 0;
+
+            grid-column: 2;
+            width: var(--header-title-width);
+        }
+
+        .logo-icon {
+            width: 26px;
+            height: 26px;
+
+            background-color: var(--text-main);
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            flex-shrink: 0;
+        }
+
+        .logo-name {
+            font-family: "Instrument Sans", sans-serif;
+
+            font-size: 18px;
+            font-weight: 600;
+
+            letter-spacing: -0.03em;
+
+            white-space: nowrap;
+        }
+
+        /* =========================
+           MENÚ
+        ========================= */
+
+        nav ul {
+            display: flex;
+
+            list-style: none;
+
+            gap: clamp(14px, 1.8vw, 24px);
+
+            align-items: center;
+
+            white-space: nowrap;
+
+            width: 100%;
+
+            justify-content: flex-end;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+
+            color: var(--text-muted);
+
+            font-size: clamp(8px, 0.8vw, 12px);
+            font-weight: 500;
+
+            letter-spacing: 0.05em;
+
+            transition: color 0.2s ease;
+
+            position: relative;
+
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav ul li a:hover {
+            color: var(--text-main);
+        }
+
+        nav ul li a.active {
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        nav ul li a.active::after {
+            content: '';
+
+            display: block;
+
+            width: 4px;
+            height: 4px;
+
+            background-color: var(--text-main);
+
+            border-radius: 50%;
+
+            position: absolute;
+
+            bottom: -8px;
+        }
+
+        nav {
+
+            grid-column: 4;
+            width: var(--header-nav-width);
+        }
+
+        .scroll-indicator {
+
+            position: absolute;
+
+            right: var(--edge-margin);
+            top: calc(100svh - 175px);
+            bottom: auto;
+
+            width: 20px;
+            height: 130px;
+
+            color: var(--text-muted);
+
+            font-size: 10px;
+            font-weight: 600;
+
+            letter-spacing: 0.12em;
+
+            z-index: 10;
+
+            transition: opacity 0.35s ease;
+
+            animation: scroll-invitation 2.8s ease-in-out infinite;
+        }
+
+        .scroll-indicator.is-hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes scroll-invitation {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(30px);
+            }
+        }
+
+        .scroll-indicator > span:first-child {
+
+            position: absolute;
+
+            left: 50%;
+            bottom: 85px;
+
+            width: 82px;
+            height: 12px;
+
+            transform: translateX(-50%) rotate(90deg);
+            transform-origin: center;
+
+            color: var(--text-muted);
+
+            font-size: 10px;
+            line-height: 12px;
+
+            text-transform: uppercase;
+            white-space: nowrap;
+            letter-spacing: 0.12em;
+        }
+
+        .atlas-box {
+            width: 100%;
+            height: 100%;
+            min-height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scroll-arrow {
+
+            position: relative;
+
+            position: absolute;
+
+            left: 50%;
+            bottom: 0;
+
+            width: 1px;
+            height: 34px;
+
+            transform: translateX(-50%);
+
+            background-color: var(--text-main);
+        }
+
+        .scroll-arrow::after {
+
+            content: '';
+
+            position: absolute;
+
+            left: 0;
+            bottom: 0;
+
+            width: 8px;
+            height: 1px;
+
+            background-color: var(--text-main);
+
+            transform: rotate(-45deg);
+            transform-origin: left center;
+        }
+
+        .custom-cursor {
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 8px;
+            height: 8px;
+
+            background-color: #ffffff;
+
+            border-radius: 50%;
+
+            mix-blend-mode: difference;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transform: translate(-50%, -50%);
+
+            z-index: 1000;
+
+            transition: opacity 0.15s ease;
+        }
+
+        .custom-cursor::before {
+
+            content: '';
+
+            position: absolute;
+
+            inset: -6px;
+
+            border: 1px solid #ffffff;
+
+            border-radius: 50%;
+
+            mix-blend-mode: difference;
+        }
+
+        .custom-cursor.visible {
+
+            opacity: 1;
+        }
+
+        @media (pointer: fine) {
+
+            body,
+            body * {
+                cursor: none !important;
+            }
+        }
+
+        /* =========================
+           DISPOSICIÓN PRINCIPAL
+        ========================= */
+
+        .main-layout {
+            width: var(--main-stage-width);
+            max-width: 100%;
+            margin: 0 auto;
+            
+            min-height: 100vh;
+            height: 100vh;
+            
+            padding-top: 80px;
+            display: grid;
+            grid-template-columns: minmax(0, 400fr) minmax(0, 350fr);
+            gap: var(--main-gap);
+            align-items: center;
+            align-content: center;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        .projects-section {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            padding: clamp(100px, 12vh, 140px) var(--page-margin) 60px;
+            background: #ffffff;
+            z-index: 1;
+            
+            /* Cambia la proporción de las columnas para mover el mapa más a la derecha */
+            display: grid;
+            grid-template-columns: 1.3fr 1fr; 
+            align-items: center;
+            gap: clamp(24px, 3vw, 44px);
+        }
+
+        .projects-intro {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-self: stretch;
+        }
+
+        .projects-intro h2 {
+            font-family: "Inter", sans-serif;
+            font-size: clamp(16px, 1.7vw, 24px);
+            line-height: 1;
+            font-weight: 300;
+            letter-spacing: 0;
+            white-space: nowrap;
+            margin-bottom: clamp(22px, 3vw, 40px);
+        }
+
+        .project-collage {
+            flex: 0 0 auto;
+            min-height: 0;
+            width: min(54vw, 100%);
+            height: min(74vh, 700px);
+            padding-bottom: 28px;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            grid-template-rows: repeat(5, minmax(0, 1fr));
+            gap: 12px;
+            position: relative;
+        }
+
+        .project-card {
+            min-width: 0;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            color: #121218;
+            background: #E4EDF2;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            isolation: isolate;
+        }
+
+        .project-card.is-expanded {
+            position: absolute;
+            grid-area: auto;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+
+        /* 1. Ocultar la imagen de fondo al expandir la tarjeta */
+        /* 1. Ocultar la imagen de fondo al expandir la tarjeta */
+        .project-card.is-expanded .decathlon-shoe,
+        .project-card.is-expanded .project-hover-image {
+            opacity: 0 !important;
+            display: none;
+        }
+
+        /* 2. Estructura de detalles contenida */
+        .project-card-details {
+            display: none;
+            margin-top: 14px;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            color: #121218;
+            font-family: "Inter", sans-serif;
+        }
+
+        
+        .project-card.is-expanded .project-card-details {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        .project-detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .project-detail-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #687076;
+        }
+
+        .project-detail-value {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 1.4;
+            color: #121218;
+        }
+
+        .project-description {
+            font-size: 13px;
+            line-height: 1.4;
+            font-weight: 300;
+            color: #2d2e36;
+        }
+
+        /* Botón de acceso al PDF en pestaña nueva */
+        .project-pdf-link {
+            display: block;
+            width: 100%;
+            margin-top: 6px;
+            text-decoration: none;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .project-pdf-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            border-color: #cbd5e1;
+        }
+
+        /* ===
+           MINIATURA DE PDF (RESPONSIVA A LA CAJA)
+        ========================= */
+        
+
+        /* =========================
+           MINIATURA DE PDF (AJUSTADA AL LÍMITE DE LA CAJA)
+        ========================= */
+        .pdf-cover-container {
+            position: relative;
+            width: 100%;
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-top: 4px;
+            background: transparent;
+            overflow: hidden;
+        }
+
+        .pdf-cover-container a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 100%;
+            max-height: 100%;
+            height: 100%;
+            background: #f1f5f9;   
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .pdf-cover-container a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            border-color: #cbd5e1;
+        }
+
+        .pdf-cover-container img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .pdf-cover-container a:hover img {
+            transform: scale(1.02);
+        }
+
+        .project-pdf-link:hover .pdf-cover-img {
+            transform: scale(1.03);
+        }
+
+        .pdf-cover-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(18, 18, 24, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .pdf-cover-overlay span {
+            color: #ffffff;
+            font-weight: 500;
+            font-size: 12px;
+            padding: 6px 12px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 6px;
+        }
+
+        .project-pdf-link:hover .pdf-cover-overlay {
+            opacity: 1;
+        }
+
+        .project-card-close {
+            display: none;
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            z-index: 2;
+            width: 32px;
+            height: 32px;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            border: 1px solid currentColor;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.12);
+            color: inherit;
+            font: inherit;
+            font-size: 24px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .project-card.is-expanded .project-card-close {
+            display: none;
+        }
+
+        .project-card.is-expanded .project-number {
+            transform: none;
+        }
+
+        .project-expand-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 2;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            border: none;
+            border-radius: 50%;
+            background: #ffffff;
+            color: #A5B7C0;
+            font: inherit;
+            font-size: 0;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .project-expand-btn::before {
+            content: '\2197';
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .project-card.is-expanded .project-expand-btn::before {
+            content: '\00d7';
+            font-size: 25px;
+            font-weight: 900;
+        }
+
+        .project-number {
+            margin-left: 0;
+        }
+
+        .decathlon-shoe {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .project-card > *:not(.decathlon-shoe):not(.project-hover-image):not(.project-expand-btn):not(.project-card-close) {
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-card:nth-of-type(1):hover .decathlon-shoe {
+            opacity: 1;
+        }
+
+        .project-card:nth-of-type(2) .project-hover-image,
+        .project-card:nth-of-type(3) .project-hover-image,
+        .project-card:nth-of-type(4) .project-hover-image,
+        .project-card:nth-of-type(5) .project-hover-image {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .project-card:nth-of-type(2):hover .project-hover-image,
+        .project-card:nth-of-type(3):hover .project-hover-image,
+        .project-card:nth-of-type(4):hover .project-hover-image,
+        .project-card:nth-of-type(5):hover .project-hover-image {
+            opacity: 1;
+        }
+
+        .project-card.is-expanded {
+            width: auto;
+            height: auto;
+        }
+
+        .project-card.is-expanded {
+            height: auto;
+        }
+
+        .project-card-placeholder {
+            min-width: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .project-number {
+            width: fit-content;
+            max-width: 100%;
+            min-height: 26px;
+            padding: 6px;
+            align-self: flex-start;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            background: #ffffff;
+            border-radius: 8px;
+            font-family: "Avenir Next LT Pro Light", "Avenir Next LT Pro", "Avenir Next", sans-serif;
+            font-size: 13px;
+            font-weight: 200;
+            line-height: 1;
+            letter-spacing: 0.03em;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .project-card strong {
+            font-family: "Nunito Sans", sans-serif;
+            font-size: clamp(13px, 1.2vw, 19px);
+            line-height: 1.2;
+            
+            /* CONTROL DEL GROSOR:
+            - 200: Extra fino (muy estilizado y ligero)
+            - 300: Fino (Light clásico)
+            */
+            font-weight: 200; 
+            
+            color: #000000;
+            margin-top: 8px;
+            transition: font-weight 0.2s ease;
+        }
+
+                /* Hace el texto en negrita al pasar el ratón */
+        .project-card:hover strong {
+            font-weight: 600;
+        }
+
+        /* Mantiene el texto en negrita cuando la tarjeta está expandida */
+        .project-card.is-expanded strong {
+            font-weight: 600;
+        }
+
+        
+        /* =========================
+           COLUMNA IZQUIERDA
+        ========================= */
+
+        .hero-content {
+            width: 100%;
+
+            --text-gap: 3cqw;
+
+            height: clamp(340px, 34vw, 430px);
+
+            padding: 0;
+
+            background-color: transparent;
+
+            border: none;
+
+            border-radius: 20px;
+
+            container-type: inline-size;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: flex-start;
+        }
+
+        .hero-content h1 {
+
+            font-family: "Instrument Sans", sans-serif;
+
+            font-size: clamp(24px, 8.5cqw, 68px);
+            font-weight: 600;
+
+            line-height: 1.1;
+
+            letter-spacing: -0.03em;
+
+            margin-bottom: 0;
+
+            color: var(--text-main);
+
+            width: 100%;
+
+            overflow-wrap: normal;
+
+            overflow: visible;
+        }
+
+        .hero-title-line {
+
+            display: block;
+
+            white-space: normal;
+        }
+
+        .hero-copy {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: var(--text-gap);
+        }
+
+        .hero-content p {
+
+            font-size: 3.1cqw;
+
+            color: var(--text-muted);
+
+            line-height: 1.5;
+
+            max-width: 100%;
+
+            margin-bottom: 0;
+        }
+
+        .hero-actions {
+
+            display: flex;
+
+            gap: 3cqw;
+
+            margin-top: var(--text-gap);
+
+            margin-bottom: 0;
+        }
+
+        .btn {
+
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 2.4cqw 4.2cqw;
+
+            border-radius: 10px;
+
+            font-size: 2.8cqw;
+            font-weight: 500;
+
+            text-decoration: none;
+
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+
+            background-color: var(--text-main);
+
+            color: white;
+
+            box-shadow:
+                inset 0 2px 0 rgba(255,255,255,0.1),
+                0 2px 4px rgba(18,18,24,0.3);
+        }
+
+        .btn-secondary {
+
+            background-color: var(--surface-color);
+
+            color: var(--text-main);
+
+            border: 1px solid var(--border-color);
+        }
+
+        .btn:hover,
+        .floating-card:hover,
+        .floating-btn:hover,
+        .close-contact-btn:hover {
+
+            filter: brightness(1.14);
+
+            transition:
+                filter 0.2s ease,
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .btn-primary:hover {
+
+            background-color: rgb(45, 46, 54);
+        }
+
+        .btn-secondary:hover {
+
+            background-color: rgb(248, 248, 249);
+
+            border-color: rgb(190, 192, 198);
+        }
+
+        /* =========================
+           LOGOS
+        ========================= */
+
+        .logos-container {
+
+            width: 100%;
+
+            border-top: none;
+
+            padding-top: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: flex-start;
+
+            margin-bottom: 0;
+
+            margin-top: auto;
+
+            margin-bottom: 56px;
+
+            position: relative;
+        }
+
+        .logos-container::before {
+
+            content: '';
+
+            position: absolute;
+
+            top: calc(-2 * var(--text-gap));
+            left: 0;
+            right: 0;
+
+            border-top: 1px solid var(--border-color);
+        }
+
+        .logos-container img {
+
+            width: 100%;
+
+            height: auto;
+
+            object-fit: contain;
+        }
+
+        /* =========================
+           COLUMNA DERECHA
+        ========================= */
+
+        .right-column-container {
+
+            position: relative;
+
+            width: auto;
+            max-width: none;
+            height: clamp(340px, 34vw, 430px);
+            aspect-ratio: 350 / 450;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            overflow: hidden;
+
+            border-radius: 20px;
+
+            align-self: center;
+            justify-self: center;
+
+            padding-right: 0;
+        }
+
+        /* =========================
+           FOTO DE PERFIL
+        ========================= */
+
+        .profile-view {
+
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: flex-end;
+            justify-content: center;
+
+            transition:
+                transform 0.9s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.7s ease;
+        }
+
+        .profile-view img.profile-img {
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            object-position: top center;
+
+            display: block;
+
+            transform: scaleX(1.05);       /* <--- Aumenta un 5% de ancho hacia la derecha (puedes probar con 1.04 o 1.06 si lo prefieres) */
+            transform-origin: left center; /* <--- Mantiene el lado izquierdo, superior e inferior exactamente fijos */
+        }
+
+        .profile-view.hidden {
+
+            transform: translateY(100%);
+
+            opacity: 0;
+
+            pointer-events: none;
+        }
+
+        /* =========================
+           TARJETA FLOTANTE
+        ========================= */
+
+        .floating-card {
+
+            position: absolute;
+
+            bottom: var(--card-bottom-space);
+
+            left: 24px;
+            right: 24px;
+
+            background: rgba(255, 255, 255, 0.35);
+
+            backdrop-filter: blur(12px);
+
+            -webkit-backdrop-filter: blur(12px);
+
+            border: 1px solid rgba(255, 255, 255, 0.4);
+
+            padding: 20px;
+
+            border-radius: 16px;
+
+            color: rgb(18, 18, 24);
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            transition:
+                filter 0.2s ease,
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .floating-card:hover {
+
+            background: rgba(255, 255, 255, 0.55);
+
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .floating-card-text small {
+
+            display: block;
+
+            font-size: 11px;
+
+            color: rgba(18, 18, 24, 0.6);
+
+            margin-bottom: 2px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.05em;
+        }
+
+        .floating-card-text span {
+
+            font-size: 15px;
+
+            font-weight: 600;
+        }
+
+        .floating-btn {
+
+            background: rgb(18, 18, 24);
+
+            color: white;
+
+            width: 36px;
+            height: 36px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            font-size: 14px;
+
+            cursor: pointer;
+
+            border: none;
+
+            transition:
+                filter 0.2s ease,
+                background 0.2s ease;
+        }
+
+
+        
+
+
+
+        /* =========================
+           VISTA DE CONTACTO
+        ========================= */
+
+        .contact-view {
+
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.2);
+
+            padding: 30px;
+
+            color: #ffffff;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: flex-end;
+
+            transform: translateY(-100%);
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transition:
+                transform 0.9s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.7s ease;
+
+            background-color: rgba(18, 18, 24, 1);
+        }
+
+        .contact-view.active {
+
+            transform: translateY(0);
+
+            opacity: 1;
+
+            pointer-events: auto;
+        }
+
+        .contact-bg-wrapper {
+
+            position: absolute;
+
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+
+            z-index: 1;
+
+            overflow: hidden;
+        }
+
+        .contact-bg-gif {
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            object-position: center;
+
+            display: block;
+
+            opacity: 0.85;
+        }
+
+        .contact-view::before {
+
+            content: '';
+
+            position: absolute;
+
+            inset: 0;
+
+            background: rgba(18, 18, 24, 0.65);
+
+            z-index: 2;
+        }
+
+        .contact-items,
+        .close-contact-btn {
+
+            position: relative;
+
+            z-index: 3;
+        }
+
+        .contact-items {
+
+            display: flex;
+
+            flex-direction: column;
+
+            width: 100%;
+        }
+
+        .contact-row {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 16px;
+
+            padding: 16px 0;
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-row:last-child {
+
+            border-bottom: none;
+
+            padding-bottom: 10px;
+        }
+
+        .contact-row-icon {
+
+            width: 42px;
+            height: 42px;
+
+            background:
+                rgba(45, 46, 54, 0.85);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.12);
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            box-shadow:
+                0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-row-icon svg {
+
+            width: 18px;
+            height: 18px;
+
+            stroke: #ffffff;
+
+            fill: none;
+
+            stroke-width: 1.8;
+
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .contact-row-info span.label {
+
+            display: block;
+
+            font-size: 10px;
+
+            text-transform: none;
+
+            letter-spacing: 0.02em;
+
+            color: rgb(170, 173, 182);
+
+            margin-bottom: 3px;
+        }
+
+        .contact-row-info span.value,
+        .contact-row-info a {
+
+            font-size: 12px;
+
+            font-weight: 300;
+
+            color: #ffffff;
+
+            text-decoration: none;
+        }
+
+        .contact-row-info a:hover {
+
+            text-decoration: underline;
+        }
+
+        /* =========================
+           BOTÓN CERRAR
+        ========================= */
+
+        .close-contact-btn {
+
+            position: absolute;
+
+            top: 20px;
+            right: 20px;
+
+            background:
+                rgba(255, 255, 255, 0.1);
+
+            border: none;
+
+            color: white;
+
+            width: 32px;
+            height: 32px;
+
+            border-radius: 50%;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 16px;
+
+            transition: background 0.2s;
+        }
+
+        .close-contact-btn:hover {
+
+            background:
+                rgba(255, 255, 255, 0.2);
+        }
+
+        .page-loader {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 100;
+
+            background: transparent;
+
+            color: #ffffff;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            opacity: 1;
+
+            visibility: visible;
+
+            transition:
+                opacity 0.6s ease,
+                visibility 0.6s ease;
+        }
+
+        .page-loader::before,
+        .page-loader::after {
+
+            content: '';
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+
+            height: 50%;
+
+            background: #000000;
+
+            z-index: -1;
+
+            transition: transform 0.75s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        .page-loader::before {
+
+            top: 0;
+        }
+
+        .page-loader::after {
+
+            bottom: 0;
+        }
+
+        .page-loader.split::before {
+
+            transform: translateY(-100%);
+        }
+
+        .page-loader.split::after {
+
+            transform: translateY(100%);
+        }
+
+        .page-loader.fade-content .page-loader-title {
+
+            animation: page-loader-title-out 1.1s cubic-bezier(0.82, 0.05, 0.98, 0.5) forwards;
+
+            transform: translateY(0);
+        }
+
+        .page-loader.fade-content .page-loader-bar {
+
+            animation: page-loader-bar-out 1.1s ease forwards;
+        }
+
+        .page-loader.hidden {
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            pointer-events: none;
+        }
+
+        .page-loader-content {
+
+            width: min(360px, 70vw);
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            gap: 28px;
+        }
+
+        .page-loader-title {
+
+            font-family:
+                "Inter",
+                "Helvetica Neue",
+                sans-serif;
+
+            font-size: clamp(16px, 2vw, 28px);
+            font-weight: 200;
+            -webkit-font-smoothing: antialiased;
+
+            font-synthesis: none;
+
+            line-height: 1;
+
+            letter-spacing: 0.16em;
+
+            white-space: nowrap;
+
+            text-align: center;
+
+            opacity: 0;
+
+            transform: translateY(10px);
+
+            animation: page-loader-title-in 1s ease forwards;
+        }
+
+        .page-loader-bar {
+
+            width: min(180px, 50vw);
+            height: 2px;
+
+            background: rgba(255, 255, 255, 0.25);
+
+            overflow: hidden;
+
+            opacity: 0;
+
+            animation: page-loader-bar-in 0.35s ease 1s forwards;
+
+            transition: width 1.2s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        .page-loader.bar-complete .page-loader-bar {
+
+            width: 100vw;
+        }
+
+        .page-loader-progress {
+
+            width: 0;
+            height: 100%;
+
+            background: #ffffff;
+
+            animation: page-load-progress 2.5s linear 1.1s forwards;
+        }
+
+        @keyframes page-loader-title-in {
+
+            to {
+
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes page-loader-bar-in {
+
+            to {
+
+                opacity: 1;
+            }
+        }
+
+        @keyframes page-loader-title-out {
+
+            from {
+
+                opacity: 0.7;
+            }
+
+            to {
+
+                opacity: 0;
+            }
+        }
+
+        @keyframes page-loader-bar-out {
+
+            from {
+
+                opacity: 1;
+            }
+
+            to {
+
+                opacity: 0;
+            }
+        }
+
+        @keyframes page-load-progress {
+
+            to {
+
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 900px) {
+
+            header {
+                display: grid;
+                grid-template-columns: 1fr auto;
+                padding: 24px var(--edge-margin) 20px;
+            }
+
+            .logo-container,
+            nav,
+            nav ul {
+
+                width: auto;
+                grid-column: auto;
+            }
+
+            nav ul {
+                gap: 14px;
+            }
+
+            .logo-name { display: none; }
+
+            .main-layout {
+
+                width: 100%;
+                max-width: 640px;
+                padding: 0 var(--content-margin);
+                grid-template-columns: minmax(0, 1fr);
+                gap: var(--element-gap);
+            }
+
+            .hero-content {
+
+                width: 100%;
+                height: clamp(340px, 34vw, 430px);
+            }
+
+            .right-column-container {
+
+                width: auto;
+                max-width: 100%;
+                height: clamp(340px, 34vw, 430px);
+                aspect-ratio: 350 / 450;
+                justify-self: center;
+            }
+
+            .projects-section {
+                height: auto;
+                min-height: 100svh;
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding-top: 110px;
+            }
+
+            .map-panel {
+                min-height: auto;
+                padding-top: 0;
+            }
+
+            .europe-map-frame {
+                aspect-ratio: 1.18;
+            }
+        }
+
+        @media (max-width: 560px) {
+            nav ul li a { font-size: 8px; }
+            .projects-section { padding-left: 20px; padding-right: 20px; }
+            .project-collage { gap: 8px; }
+            .project-card { padding: 12px; }
+
+            .projects-intro { height: auto; }
+            .project-collage { height: 470px; }
+        }
+
+        
+      
+
+        .map-panel {
+            min-width: 0;
+            width: 100%;
+            aspect-ratio: 4 / 3; /* Mantiene siempre la proporción 4:3 sin importar la pantalla */
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        #europe-map {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            touch-action: none;
+            user-select: none;
+        }
+
+        #europe-map svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .europe-country {
+            fill: #e2e8f0;
+            stroke: #ffffff;
+            stroke-width: 0.9px;
+            stroke-linejoin: round;
+            stroke-linecap: round;
+            transition: fill 0.2s ease, stroke 0.2s ease, filter 0.2s ease;
+        }
+
+        .europe-country.country-highlighted {
+            fill: #404650 !important;
+            stroke: #1e293b !important;
+            stroke-width: 1.5px !important;
+            filter: drop-shadow(0 0 8px rgba(64, 70, 80, 0.6));
+            opacity: 1 !important;
+        }
+
+        #highlight-spain {
+            padding: 12px 22px;
+            border: none;
+            border-radius: 12px;
+            background: var(--text-main);
+            color: #ffffff;
+            font: inherit;
+            cursor: pointer;
+        }
+
+        @media (max-width: 900px) {
+            .map-panel {
+                min-height: 520px;
+            }
+
+            #europe-map {
+                min-height: 430px;
+            }
+        }
+
+        /* Color para los países destacados de origen (un poco más oscuros que los normales) */
+        .europe-country.featured-country {
+            fill: #cbd5e1;
+        }
+
+        .project-card.is-expanded .project-detail-item:last-child {
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card.is-expanded .pdf-cover-container {
+            flex: 1;
+            min-height: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            overflow: hidden;
+        }
+
+        .project-card.is-expanded .pdf-cover-container a {
+            flex: 0 0 auto;
+            display: flex;
+            width: var(--pdf-link-width) !important;
+            height: var(--pdf-link-height) !important;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .project-card.is-expanded .pdf-cover-container img {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            object-position: left center;
+        }
+
+        .project-card.is-expanded .pdf-cover-container.has-side-photo {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 12px;
+            align-items: center;
+        }
+
+        .project-card.is-expanded .pdf-cover-container.has-side-photo > a {
+            width: auto !important;
+            height: 100% !important;
+            min-width: 0;
+        }
+
+        .project-card.is-expanded .pdf-cover-container.has-side-photo > img.project-side-photo {
+            width: 100%;
+            height: 100%;
+            min-width: 0;
+            object-fit: contain;
+            object-position: center;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+
+
+        /* =========================
+           VISTA DE HERRAMIENTAS
+        ========================= */
+
+        .tools-view {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            border: 1px solid var(--border-color); /* Borde fino gris añadido */
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+            transition:
+                transform 0.9s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.7s ease;
+            background-color: rgba(18, 18, 24, 1);
+        }
+
+        .tools-view.active {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .close-tools-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(18, 18, 24, 0.08);
+            border: none;
+            color: rgb(18, 18, 24);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: background 0.2s;
+            z-index: 10; /* Z-index alto para estar siempre encima */
+            pointer-events: auto; /* Asegura que reciba clics */
+        }
+
+        .close-tools-btn:hover {
+            background: rgba(18, 18, 24, 0.15);
+        }
+
+
+
+        .tools-bg-animation {
+            position: absolute;
+            inset: -20px;
+            z-index: 1;
+            background: linear-gradient(120deg, #ffffff, #f1f3f5, #e2e8f0);
+            background-size: 200% 200%;
+            animation: whiteFluidAnimation 8s ease infinite;
+            opacity: 0.95;
+        }
+
+        @keyframes whiteFluidAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        
+    </style>
+
+    <!-- ...existing code... -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+
+
+</head>
+
+<body>
+
+    <div class="custom-cursor" id="customCursor" aria-hidden="true"></div>
+
+    <div class="page-loader" id="pageLoader" aria-label="Cargando página">
+
+        <div class="page-loader-content">
+
+            <div class="page-loader-title">
+                IGNACIO GUZMÁN
+            </div>
+
+            <div class="page-loader-bar">
+
+                <div class="page-loader-progress"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- =========================
+         CABECERA
+    ========================= -->
+
+    <header>
+
+        <a href="#" class="logo-container">
+
+            <div class="logo-icon">
+                I
+            </div>
+
+            <span class="logo-name">
+                Ignacio Guzmán
+            </span>
+
+        </a>
+
+
+        <nav>
+            <ul>
+                <li>
+                    <a href="index.html" id="homeNavLink" class="active">
+                        HOME
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html#projects" id="projectsNavLink">
+                        PROJECTS
+                    </a>
+                </li>
+
+                <li>
+                    <a href="experience.html">
+                        EXPERIENCE
+                    </a>
+                </li>
+
+                <li>
+                    <a href="education.html">
+                        EDUCATION
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        ABOUT ME
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </header>
+
+
+    <!-- =========================
+         CONTENIDO PRINCIPAL
+    ========================= -->
+
+    <main class="main-layout">
+
+
+        <!-- COLUMNA IZQUIERDA -->
+
+        <div class="hero-content">
+
+            <div class="hero-copy">
+
+                <h1>
+                    <span class="hero-title-line">
+                        Product & Market Insights
+                    </span>
+
+                    <span class="hero-title-line">
+                        Analyst
+                    </span>
+                </h1>
+
+                <p>
+                    Connecting complex market data and user behavior to drive product strategy and business growth.
+                </p>
+
+            </div>
+
+
+            <div class="hero-actions">
+
+                <a
+                    href="#projects"
+                    class="btn btn-primary"
+                    id="seeProjectsBtn">
+
+                    See projects
+
+                </a>
+
+
+                <button
+                    class="btn btn-secondary"
+                    id="openContactBtn2"
+                    style="cursor:pointer;">
+
+                    Tools
+
+                </button>
+
+            </div>
+
+            <div class="logos-container">
+
+                <img
+                    src="logos.png"
+                    alt="Logos de empresas">
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             COLUMNA DERECHA
+        ========================= -->
+
+        <div class="right-column-container">
+
+
+            <!-- FOTO -->
+
+            <div
+                class="profile-view"
+                id="profileView">
+
+                <img
+                    class="profile-img"
+                    src="hola.jpg"
+                    alt="Retrato de perfil">
+
+
+                <!-- TARJETA CONTACTO -->
+
+                <div class="floating-card">
+
+                    <div class="floating-card-text">
+
+                        <small>
+                            CONTACT ME
+                        </small>
+
+                        <span>
+                            Let's work together
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="floating-btn"
+                        id="openContactBtn3">
+
+                        ↗
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- =========================
+                 HERRAMIENTAS
+            ========================= -->
+
+            <!-- =========================
+                 HERRAMIENTAS
+            ========================= -->
+
+            <div
+                class="tools-view"
+                id="toolsView"
+                style="background-color: #ffffff; color: rgb(18, 18, 24);">
+
+                <div class="contact-bg-wrapper">
+                    <div class="tools-bg-animation"></div>
+                </div>
+
+                <button
+                    class="close-tools-btn"
+                    id="closeToolsBtn"
+                    type="button">
+
+                    &times;
+
+                </button>
+
+                <div style="position: relative; z-index: 3; display: flex; flex-direction: column; height: 100%; width: 100%; pointer-events: none;">
+                    <span style="font-family: 'Nunito Sans', sans-serif; font-size: 16px; font-weight: 200; color: #000000; margin-bottom: 12px; letter-spacing: 0.03em; display: block; -webkit-font-smoothing: antialiased; pointer-events: auto;">Tools I have worked with:</span>
+                    
+                    <div style="flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; pointer-events: none;">
+                        <img src="foto_tools.png" alt="Tech Stack & Tools" style="max-width: 75%; max-height: 75%; object-fit: contain; display: block; pointer-events: none;">
+                    </div>
+                </div>
+
+            </div>
+            <!-- =========================
+                 CONTACTO
+            ========================= -->
+
+            <div
+                class="contact-view"
+                id="contactView">
+
+
+                <!-- GIF -->
+
+                <div class="contact-bg-wrapper">
+
+                    <img
+                        class="contact-bg-gif"
+                        src="https://framerusercontent.com/images/IHneqoBbdHUCED6FYR137ZUxEqI.gif?width=500&height=500"
+                        alt="Animación líquida">
+
+                </div>
+
+
+                <!-- CERRAR -->
+
+                <button
+                    class="close-contact-btn"
+                    id="closeContactBtn">
+
+                    &times;
+
+                </button>
+
+
+                <!-- DATOS -->
+
+                <div class="contact-items">
+
+
+                    <!-- EMAIL -->
+
+                    <div class="contact-row">
+
+                        <div class="contact-row-icon">
+
+                            <svg viewBox="0 0 24 24">
+
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+
+                                <polyline points="22,6 12,13 2,6"></polyline>
+
+                            </svg>
+
+                        </div>
+
+
+                        <div class="contact-row-info">
+
+                            <span class="label">
+                                Email adress
+                            </span>
+
+                            <a
+                                href="mailto:ignacio.00.guzman.00@gmail.com"
+                                target="_blank">
+
+                                ignacio.00.guzman.00@gmail.com
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- LOCATION -->
+
+                    <div class="contact-row">
+
+                        <div class="contact-row-icon">
+
+                            <svg viewBox="0 0 24 24">
+
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+
+                                <circle
+                                    cx="12"
+                                    cy="10"
+                                    r="3">
+                                </circle>
+
+                            </svg>
+
+                        </div>
+
+
+                        <div class="contact-row-info">
+
+                            <span class="label">
+                                Location
+                            </span>
+
+                            <span class="value">
+                                Madrid, Spain / Remote
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- LINKEDIN -->
+
+                    <!-- LINKEDIN -->
+
+                    <div class="contact-row">
+
+                        <div class="contact-row-icon">
+
+                            <svg viewBox="0 0 24 24">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a4 4 0 0 0-4-4 4 4 0 0 0-4 4v7H6v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+
+                        </div>
+
+
+                        <div class="contact-row-info">
+
+                            <span class="label">
+                                LinkedIn
+                            </span>
+
+                            <a
+                                href="https://www.linkedin.com/in/ignacio-guzm%C3%A1n/"
+                                target="_blank">
+
+                                https://www.linkedin.com/in/ignacio-guzm%C3%A1n/
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <section class="projects-section" id="projects" aria-labelledby="projects-title">
+        <div class="projects-intro">
+            <h2 id="projects-title">See Projects</h2>
+
+            <div class="project-collage">
+                <!-- PROYECTO 1: DECATHLON -->
+                <article class="project-card" id="project-decathlon">
+                    <button class="project-expand-btn" type="button" aria-label="Expandir proyecto Decathlon">&#8594;</button>
+                    <button class="project-card-close" type="button" aria-label="Cerrar proyecto expandido">&times;</button>
+                    <span class="project-number">Decathlon</span>
+                    <strong>Decathlon Customer Experience &<br> Brand Image Optimization</strong>
+                    
+                    <div class="project-card-details">
+                        <div class="project-detail-item">
+                            <span class="project-detail-label">Location:</span>
+                            <span class="project-detail-value">Amsterdam, The Netherlands</span>
+                        </div>
+                        <div class="project-detail-item">
+                            <span class="project-detail-label">Tools:</span>
+                            <span class="project-detail-value">Python | R | Natural Language Processing (NLP) | LDA Topic Modeling | Sentiment Analysis | Predictive Modeling | Machine Learning</span>
+                        </div>
+                        <div class="project-detail-item">
+                            <span class="project-detail-label">Description:</span>
+                            <p class="project-description">
+                                Consulting project focused on analyzing large-scale online customer review datasets to optimize Decathlon Netherlands' customer experience and enhance brand image through Advanced Text Analytics & Predictive Modeling.
+                            </p>
+                        </div>
+                        <div class="project-detail-item">
+                            <span class="project-detail-label">Document:</span>
+                            <div class="pdf-cover-container has-side-photo">
+                                <a href="doc_decathlon.pdf" target="_blank" rel="noopener noreferrer">
+                                    <img src="portada_decathlon.jpg" alt="Portada Decathlon">
+                                </a>
+
+                                <img
+                                    class="project-side-photo"
+                                    src="foto_decathlon.jpg"
+                                    alt="Imagen del proyecto Decathlon">
+                            </div>
+                        </div>
+                    </div>
+
+                    <img class="decathlon-shoe" src="fondo_decathlon.png" alt="">
+                </article>
+
+                <!-- PROYECTO 2: UC3M -->
+                <article class="project-card" id="project-uc3m">
+                    <button class="project-expand-btn" type="button" aria-label="Expandir proyecto UC3M">&#8594;</button>
+                    <button class="project-card-close" type="button" aria-label="Cerrar proyecto expandido">&times;</button>
+                    <span class="project-number">UC3M</span>
+                    <strong>Blue Memory:<br>Sustainable funeral business plan</strong>
+                    
+                    <div class="project-card-details">
+                        <div class="project-detail-item">
+                            <span class="project-detail-label">Location:</span>
+                            <span class="project-detail-value">Madrid, Spain</span>
+                        </div>
+                        <div class="project-detail-item">
+                            <span class="project-detail-label">Tools:</span>
+                            <span class="project-detail-value">Excel | Market Research | Finance | Marketing | Operations | Customer Experience Showroom</span>
+                        </div>
+                        <div class="project-detail-item">
+                            <span class="project-detail-label">Description:</span>
+                            <p class="project-description">
+                                Final Thesis for my Bachelor’s Degree: Designed a business plan and financial feasibility model to launch Spain’s first eco-friendly funeral service, converting ashes into artificial reef balls to restore marine ecosystems and promote biodiversity along the coast.
+                            </p>
+                        </div>
+                        <div class="project-detail-item">
+                            <span class="project-detail-label">Document:</span>
+                            <div class="pdf-cover-container has-side-photo">
+                                <a href="doc_uc3m.pdf" target="_blank" rel="noopener noreferrer">
+                                    <img src="portada_uc3m.jpg" alt="Portada UC3M">
+                                </a>
+
+                                <img
+                                    class="project-side-photo"
+                                    src="foto_uc3m.jpg"
+                                    alt="Imagen del proyecto UC3M">
+                            </div>
+                        </div>
+                    </div>
+
+                    <img class="project-hover-image" src="fondo_uc3m.png" alt="">
+                </article>
+
+                <!-- PROYECTO 3: ERASMUS UNIVERSITY -->
+                <article class="project-card" id="project-erasmus">
+                    <button class="project-expand-btn" type="button" aria-label="Expandir proyecto Erasmus University">&#8594;</button>
+                    <button class="project-card-close" type="button" aria-label="Cerrar proyecto expandido">&times;</button>
+                    <span class="project-number">Erasmus University</span>
+                    <strong>Robustness of predictions<br>in non - random samples</strong>
+                    
+                    <div class="project-card-details">
+                        <div class="project-detail-item">
+                            <span class="project-detail-label">Location:</span>
+                            <span class="project-detail-value">Rotterdam, Netherlands</span>
+                        </div>
+                        <div class="project-detail-item">
+                            <span class="project-detail-label">Tools:</span>
+                            <span class="project-detail-value">R language | Python | Machine Learning | Heckman Model | Marketing</span>
+                        </div>
+                        <div class="project-detail-item">
+                            <span class="project-detail-label">Description:</span>
+                            <p class="project-description">
+                                Master's thesis research: Evaluated the predictive accuracy of Heckman models versus linear regressions under selection bias, finding that Heckman models offer superior overall predictions despite higher average errors in censored samples, except when extreme correlation or censoring favors standard regression models.
+                            </p>
+                        </div>
+                        <div class="project-detail-item">
+                            <span class="project-detail-label">Document:</span>
+                            <div class="pdf-cover-container">
+                                <a href="doc_erasmus.pdf" target="_blank" rel="noopener noreferrer">
+                                    <img src="portada_erasmus.jpg" alt="Portada Erasmus University">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <img class="project-hover-image" src="fondo_erasmus.png" alt="">
+                </article>
+
+                <!-- PROYECTO 4: LATVIJAS UNIVERSITATE -->
+                <article class="project-card" id="project-latvia">
+                    <button class="project-expand-btn" type="button" aria-label="Expandir proyecto Latvijas Universitate">&#8594;</button>
+                    <button class="project-card-close" type="button" aria-label="Cerrar proyecto expandido">&times;</button>
+                    <span class="project-number">Latvijas Universitate</span>
+                    <strong>Feeling with no inputs</strong>
+                    
+                    <div class="project-card-details">
+                        <div class="project-detail-item">
+                            <span class="project-detail-label">Location:</span>
+                            <span class="project-detail-value">Riga, Latvia</span>
+                        </div>
+                        <div class="project-detail-item">
+                            <span class="project-detail-label">Tools:</span>
+                            <span class="project-detail-value">Data Analysis, Qualitative Research</span>
+                        </div>
+                        <div class="project-detail-item">
+                            <span class="project-detail-label">Description:</span>
+                            <p class="project-description">
+                                Exploratory study analyzing subjective emotional responses and decision-making patterns in data-deprived environments.
+                            </p>
+                        </div>
+                    </div>
+
+                    <img class="project-hover-image" src="fondo_latvia.png" alt="">
+                </article>
+
+                <!-- PROYECTO 5: LINKEDIN -->
+                <article class="project-card">
+                    <button class="project-expand-btn" type="button" aria-label="Expandir proyecto LinkedIn">&#8594;</button>
+                    <button class="project-card-close" type="button" aria-label="Cerrar proyecto expandido">&times;</button>
+                    <span class="project-number">LinkedIn</span>
+                    <strong>Nielsen Heuristics on LinkedIn</strong>
+                    
+                    <div class="project-card-details">
+                        <div class="project-detail-item">
+                            <span class="project-detail-label">Location:</span>
+                            <span class="project-detail-value">Remote / Madrid</span>
+                        </div>
+                        <div class="project-detail-item">
+                            <span class="project-detail-label">Tools:</span>
+                            <span class="project-detail-value">UX Audit | Nielsen Heuristics | PowerPoint</span>
+                        </div>
+                        <div class="project-detail-item">
+                            <span class="project-detail-label">Description:</span>
+                            <p class="project-description">
+                                Conducted a UX heuristic evaluation on LinkedIn to identify pain points in job offer navigation and reaction interactions, proposing design solutions to improve information hierarchy and cross-language consistency.
+                            </p>
+                        </div>
+                        <div class="project-detail-item">
+                            <span class="project-detail-label">Document:</span>
+                            <div class="pdf-cover-container">
+                                <a href="doc_linkedin.pdf" target="_blank" rel="noopener noreferrer">
+                                    <img src="portada_linkedin.jpg" alt="Portada LinkedIn">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <img class="project-hover-image" src="fondo_linkedin.png" alt="">
+                </article>
+            </div>
+        </div>
+        <div class="atlas-box" id="atlasBox" aria-label="Mapa de Europa">
+            <div id="europe-map"></div>
+        </div>
+    </section>
+
+
+    <div class="scroll-indicator" id="scrollIndicator" role="button" tabindex="0" aria-label="Scroll down to projects">
+
+        <span>SCROLL DOWN</span>
+
+        <span class="scroll-arrow"></span>
+
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        const profileView =
+            document.getElementById('profileView');
+
+        const contactView =
+            document.getElementById('contactView');
+        
+        const toolsView = document.getElementById('toolsView');
+
+        const closeToolsBtn = document.getElementById('closeToolsBtn');
+
+        const openBtn2 =
+            document.getElementById('openContactBtn2');
+
+        const openBtn3 =
+            document.getElementById('openContactBtn3');
+
+        const closeBtn =
+            document.getElementById('closeContactBtn');
+
+        const pageLoader =
+            document.getElementById('pageLoader');
+
+        const customCursor =
+            document.getElementById('customCursor');
+
+        const projectsSection =
+            document.getElementById('projects');
+
+        const seeProjectsBtn =
+            document.getElementById('seeProjectsBtn');
+
+        const projectsNavLink =
+            document.getElementById('projectsNavLink');
+
+        const homeNavLink =
+            document.getElementById('homeNavLink');
+
+        const scrollIndicator =
+            document.getElementById('scrollIndicator');
+
+        const navLinks =
+            document.querySelectorAll('nav ul li a');
+
+        const projectCards =
+            document.querySelectorAll('.project-card');
+
+        let sectionScrollInProgress = false;
+        const scrollDuration = 1500;
+
+        history.scrollRestoration = 'manual';
+
+        function resetPagePosition() {
+            window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+        }
+
+        resetPagePosition();
+        window.addEventListener('pageshow', resetPagePosition);
+        window.setTimeout(resetPagePosition, 0);
+        window.setTimeout(resetPagePosition, 100);
+
+        function animateScrollTo(targetY) {
+            const startY = window.scrollY;
+            const distance = targetY - startY;
+            const startTime = performance.now();
+
+            function step(currentTime) {
+                const elapsed = Math.min((currentTime - startTime) / scrollDuration, 1);
+                const easedProgress = elapsed < 0.5
+                    ? 2 * elapsed * elapsed
+                    : 1 - Math.pow(-2 * elapsed + 2, 2) / 2;
+
+                window.scrollTo(0, startY + distance * easedProgress);
+
+                if (elapsed < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    sectionScrollInProgress = false;
+                }
+            }
+
+            window.requestAnimationFrame(step);
+        }
+
+        function scrollToProjects(e) {
+            if (e) e.preventDefault();
+            sectionScrollInProgress = true;
+            animateScrollTo(projectsSection.offsetTop);
+        }
+
+        function scrollToHome(e) {
+            if (e) e.preventDefault();
+            sectionScrollInProgress = true;
+            animateScrollTo(0);
+        }
+
+        function updateActiveNav() {
+            const isAtProjects = window.scrollY >= projectsSection.offsetTop - 1;
+            navLinks.forEach((link) => link.classList.remove('active'));
+            (isAtProjects ? projectsNavLink : homeNavLink).classList.add('active');
+        }
+
+        function scrollToProjectsWithKeyboard(e) {
+            if (e.key === 'Enter' || e.key === ' ') scrollToProjects(e);
+        }
+
+        seeProjectsBtn.addEventListener('click', scrollToProjects);
+        projectsNavLink.addEventListener('click', scrollToProjects);
+        scrollIndicator.addEventListener('click', scrollToProjects);
+        scrollIndicator.addEventListener('keydown', scrollToProjectsWithKeyboard);
+
+        function setCardGeometry(card, geometry) {
+            card.style.top = `${geometry.top}px`;
+            card.style.left = `${geometry.left}px`;
+            card.style.right = `${geometry.right}px`;
+            card.style.bottom = `${geometry.bottom}px`;
+        }
+
+        function animateCardGeometry(card, fromGeometry, toGeometry, onComplete) {
+            const startTime = performance.now();
+            const duration = 800;
+
+            function step(currentTime) {
+                const progress = Math.min((currentTime - startTime) / duration, 1);
+                const easedProgress = progress < 0.5
+                    ? 2 * progress * progress
+                    : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+                const geometry = {};
+
+                ['top', 'left', 'right', 'bottom'].forEach((edge) => {
+                    geometry[edge] = fromGeometry[edge]
+                        + (toGeometry[edge] - fromGeometry[edge]) * easedProgress;
+                });
+
+                setCardGeometry(card, geometry);
+
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else if (onComplete) {
+                    onComplete();
+                }
+            }
+
+            window.requestAnimationFrame(step);
+        }
+
+        function getCardGeometry(card, collageRect) {
+            const cardRect = card.getBoundingClientRect();
+
+            return {
+                top: cardRect.top - collageRect.top,
+                left: cardRect.left - collageRect.left,
+                right: collageRect.right - cardRect.right,
+                bottom: collageRect.bottom - cardRect.bottom
+            };
+        }
+
+        function getProjectAreaGeometry(collageRect) {
+            const cardRects = Array.from(projectCards, (card) => card.getBoundingClientRect());
+            const areaTop = Math.min(...cardRects.map((rect) => rect.top));
+            const areaLeft = Math.min(...cardRects.map((rect) => rect.left));
+            const areaRight = Math.max(...cardRects.map((rect) => rect.right));
+            const areaBottom = Math.max(...cardRects.map((rect) => rect.bottom));
+
+            return {
+                top: areaTop - collageRect.top,
+                left: areaLeft - collageRect.left,
+                right: collageRect.right - areaRight,
+                bottom: collageRect.bottom - areaBottom
+            };
+        }
+
+        // Mapeo de proyectos a códigos ISO de países
+        const projectCountryMap = {
+            "project-decathlon": "528", // Holanda
+            "project-uc3m": "724",      // España
+            "project-erasmus": "528",   // Holanda
+            "project-latvia": "428"     // Letonia
+        };
+
+
+        function fitPdfLinkToImage(card) {
+            const container = card.querySelector('.pdf-cover-container');
+            const link = container?.querySelector('a');
+            const image = link?.querySelector('img');
+
+            if (!container || !link || !image || !image.naturalWidth) return;
+
+            const containerWidth = container.clientWidth;
+            const containerHeight = container.clientHeight;
+            const imageRatio = image.naturalWidth / image.naturalHeight;
+
+            let width = containerWidth;
+            let height = width / imageRatio;
+
+            if (height > containerHeight) {
+                height = containerHeight;
+                width = height * imageRatio;
+            }
+
+            link.style.setProperty('--pdf-link-width', `${width}px`);
+            link.style.setProperty('--pdf-link-height', `${height}px`);
+        }
+
+        function preparePdfLink(card) {
+            const image = card.querySelector('.pdf-cover-container img');
+
+            if (!image) return;
+
+            const update = () => {
+                if (card.classList.contains('is-expanded')) {
+                    fitPdfLinkToImage(card);
+                }
+            };
+
+            if (image.complete) {
+                requestAnimationFrame(update);
+            } else {
+                image.addEventListener('load', update, { once: true });
+            }
+
+            new ResizeObserver(update).observe(
+                card.querySelector('.pdf-cover-container')
+            );
+        }
+
+        projectCards.forEach(preparePdfLink);
+
+
+
+        function fitPdfLinkToImage(card) {
+            const container = card.querySelector('.pdf-cover-container');
+            const link = container?.querySelector('a');
+            const image = link?.querySelector('img');
+
+            if (!container || !link || !image || !image.naturalWidth) return;
+
+            const containerWidth = container.clientWidth;
+            const containerHeight = container.clientHeight;
+            const imageRatio = image.naturalWidth / image.naturalHeight;
+
+            let width = containerWidth;
+            let height = width / imageRatio;
+
+            if (height > containerHeight) {
+                height = containerHeight;
+                width = height * imageRatio;
+            }
+
+            link.style.setProperty('--pdf-link-width', `${width}px`);
+            link.style.setProperty('--pdf-link-height', `${height}px`);
+        }
+
+        function preparePdfLink(card) {
+            const image = card.querySelector('.pdf-cover-container img');
+
+            if (!image) return;
+
+            const update = () => {
+                if (card.classList.contains('is-expanded')) {
+                    fitPdfLinkToImage(card);
+                }
+            };
+
+            if (image.complete) {
+                requestAnimationFrame(update);
+            } else {
+                image.addEventListener('load', update, { once: true });
+            }
+
+            new ResizeObserver(update).observe(
+                card.querySelector('.pdf-cover-container')
+            );
+        }
+
+        projectCards.forEach(preparePdfLink);
+
+
+        function expandProjectCard(card) {
+            if (card.classList.contains('is-expanded')) return;
+
+            const projectCollage = document.querySelector('.project-collage');
+            const collageRect = projectCollage.getBoundingClientRect();
+            const normalGeometry = getCardGeometry(card, collageRect);
+            const projectAreaGeometry = getProjectAreaGeometry(collageRect);
+            const isFutureState = card.matches('.project-card:nth-of-type(5)');
+            const expandedGeometry = isFutureState
+                ? {
+                    top: projectAreaGeometry.top,
+                    left: projectAreaGeometry.left,
+                    right: normalGeometry.right,
+                    bottom: normalGeometry.bottom
+                }
+                : projectAreaGeometry;
+
+            card.normalGeometry = normalGeometry;
+            card.expandedGeometry = expandedGeometry;
+            const placeholder = document.createElement('div');
+            placeholder.className = 'project-card-placeholder';
+            card.placeholder = placeholder;
+            card.parentElement.insertBefore(placeholder, card);
+            card.classList.add('is-expanded');
+            requestAnimationFrame(() => fitPdfLinkToImage(card));
+                
+            // ILUMINA Y MANTIENE EL PAÍS AL EXPANDIR
+            const isoCode = projectCountryMap[card.id];
+            if (isoCode) {
+                const country = document.getElementById(`country-${isoCode}`);
+                if (country) {
+                    country.parentNode.appendChild(country);
+                    country.classList.add("country-highlighted");
+                }
+            }
+
+            setCardGeometry(card, normalGeometry);
+            card.offsetWidth;
+            animateCardGeometry(card, normalGeometry, expandedGeometry);
+        }
+
+        function collapseProjectCard(card) {
+            if (!card.classList.contains('is-expanded')) return;
+
+            // QUITA LA ILUMINACIÓN AL CERRAR LA TARJETA
+            const isoCode = projectCountryMap[card.id];
+            if (isoCode) {
+                const country = document.getElementById(`country-${isoCode}`);
+                if (country) {
+                    country.classList.remove("country-highlighted");
+                }
+            }
+
+            animateCardGeometry(card, card.expandedGeometry, card.normalGeometry, () => {
+                card.classList.remove('is-expanded');
+                card.style.top = '';
+                card.style.left = '';
+                card.style.right = '';
+                card.style.bottom = '';
+                card.placeholder.remove();
+                card.placeholder = null;
+            });
+        }
+
+        projectCards.forEach((card) => {
+            const expandButton = card.querySelector('.project-expand-btn');
+            const closeButton = card.querySelector('.project-card-close');
+
+            expandButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (card.classList.contains('is-expanded')) {
+                    collapseProjectCard(card);
+                } else {
+                    expandProjectCard(card);
+                }
+            });
+
+            closeButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                collapseProjectCard(card);
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                projectCards.forEach((card) => collapseProjectCard(card));
+            }
+        });
+
+        window.addEventListener('scroll', () => {
+            scrollIndicator.classList.toggle('is-hidden', window.scrollY > window.innerHeight * 0.5);
+            updateActiveNav();
+        }, { passive: true });
+
+        updateActiveNav();
+
+        window.addEventListener('wheel', (e) => {
+            if (sectionScrollInProgress) return;
+
+            const isAtHome = window.scrollY < window.innerHeight * 0.45;
+            const isAtProjects = window.scrollY > window.innerHeight * 0.55;
+
+            if (e.deltaY > 0 && isAtHome) {
+                e.preventDefault();
+                scrollToProjects();
+            } else if (e.deltaY < 0 && isAtProjects) {
+                e.preventDefault();
+                scrollToHome();
+            }
+        }, { passive: false });
+
+        window.addEventListener(
+            'pointermove',
+            (e) => {
+                customCursor.style.left = `${e.clientX}px`;
+                customCursor.style.top = `${e.clientY}px`;
+                customCursor.classList.add('visible');
+            }
+        );
+
+        if (sessionStorage.getItem('portfolio_visited')) {
+            pageLoader.classList.add('hidden');
+        } else {
+            sessionStorage.setItem('portfolio_visited', 'true');
+
+            window.setTimeout(
+                () => pageLoader.classList.add('bar-complete'),
+                3600
+            );
+
+            window.setTimeout(
+                () => pageLoader.classList.add('fade-content'),
+                3600
+            );
+
+            window.setTimeout(
+                () => pageLoader.classList.add('split'),
+                4800
+            );
+
+            window.setTimeout(
+                () => pageLoader.classList.add('hidden'),
+                5600
+            );
+        }
+
+
+        function showContact(e) {
+            e.preventDefault();
+            toolsView.classList.remove('active');
+            profileView.classList.add('hidden');
+            contactView.classList.add('active');
+        }
+
+
+        function showProfile(e) {
+            e.preventDefault();
+            profileView.classList.remove('hidden');
+            contactView.classList.remove('active');
+            toolsView.classList.remove('active');
+        }
+
+
+        function showTools(e) {
+            e.preventDefault();
+            contactView.classList.remove('active');
+            profileView.classList.add('hidden');
+            toolsView.classList.add('active');
+        }
+
+        if (openBtn2) {
+            openBtn2.addEventListener('click', showTools);
+        }
+
+        if (openBtn3) {
+            openBtn3.addEventListener('click', showContact);
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', showProfile);
+        }
+
+        if (closeToolsBtn) {
+            closeToolsBtn.addEventListener('click', showProfile);
+        }
+
+        const europeanIsoCodes = new Set([
+        "724", "250", "620", "276", "380", "826", "372", "528",
+        "056", "756", "040", "616", "203", "703", "348", "642",
+        "100", "300", "578", "752", "246", "208", "233", "428",
+        "440", "112", "804", "191", "705", "070", "688", "008",
+        "807", "499", "470", "020"
+    ]);
+
+    function filterCoordinates(coords) {
+        return coords.filter(([lon, lat]) => {
+            if (!Number.isFinite(lon) || !Number.isFinite(lat)) return false;
+            if (lat < 35) return false;        // sin Canarias
+            if (lat > 70) return false;        // sin Svalbard
+            if (lon < -25 || lon > 45) return false;
+            return true;
+        });
+    }
+
+    function removeExcludedParts(geometry) {
+        if (!geometry) return geometry;
+
+        if (geometry.type === "Polygon") {
+            return {
+                ...geometry,
+                coordinates: geometry.coordinates
+                    .map(ring => filterCoordinates(ring))
+                    .filter(ring => ring.length > 2)
+            };
+        }
+
+        if (geometry.type === "MultiPolygon") {
+            return {
+                ...geometry,
+                coordinates: geometry.coordinates
+                    .map(polygon =>
+                        polygon
+                            .map(ring => filterCoordinates(ring))
+                            .filter(ring => ring.length > 2)
+                    )
+                    .filter(polygon => polygon.length > 0)
+            };
+        }
+
+        return geometry;
+    }
+
+    async function initEuropeMap() {
+        const container = document.getElementById("europe-map");
+        const atlasBox = document.getElementById("atlasBox");
+
+        if (!container || !atlasBox) return;
+
+        const width = 800;
+        const height = 600;
+
+        const svg = d3.select(container)
+            .append("svg")
+            .attr("viewBox", `0 0 ${width} ${height}`)
+            .attr("preserveAspectRatio", "xMidYMid meet");
+
+        try {
+            const world = await d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json");
+
+            const rawFeatures = topojson.feature(world, world.objects.countries).features;
+
+            const countries = rawFeatures
+                .filter(country => europeanIsoCodes.has(String(country.id).padStart(3, "0")))
+                .map(feature => ({
+                    ...feature,
+                    geometry: removeExcludedParts(feature.geometry)
+                }))
+                .filter(feature => {
+                    if (!feature.geometry) return false;
+                    if (feature.geometry.type === "Polygon") return feature.geometry.coordinates.length > 0;
+                    if (feature.geometry.type === "MultiPolygon") return feature.geometry.coordinates.length > 0;
+                    return false;
+                });
+
+            const featureCollection = {
+                type: "FeatureCollection",
+                features: countries
+            };
+
+            const projection = d3.geoConicConformal()
+                .center([10, 52])
+                .parallels([35, 65]);
+
+            projection.fitExtent(
+                [[0, 0], [width, height]],
+                featureCollection
+            );
+
+            const path = d3.geoPath().projection(projection);
+
+            const featuredIsoCodes = new Set(["724", "528", "428", "578"]);
+
+            svg.append("g")
+                .selectAll("path")
+                .data(countries)
+                .join("path")
+                .attr("class", country => {
+                    const isoCode = String(country.id).padStart(3, "0");
+                    return featuredIsoCodes.has(isoCode) 
+                        ? "europe-country featured-country" 
+                        : "europe-country";
+                })
+                .attr("id", country => `country-${String(country.id).padStart(3, "0")}`)
+                .attr("d", path);
+
+            Object.entries(projectCountryMap).forEach(([cardId, isoCode]) => {
+                const card = document.getElementById(cardId);
+                const country = document.getElementById(`country-${isoCode}`);
+
+                if (card && country) {
+                    card.addEventListener("mouseenter", () => {
+                        country.parentNode.appendChild(country);
+                        country.classList.add("country-highlighted");
+                    });
+
+                    card.addEventListener("mouseleave", () => {
+                        // SOLO QUITA EL RESALTADO SI LA TARJETA NO ESTÁ EXPANDIDA
+                        if (!card.classList.contains("is-expanded")) {
+                            country.classList.remove("country-highlighted");
+                        }
+                    });
+                }
+            });
+        } catch (error) {
+            console.error("No se pudo cargar el mapa:", error);
+        }
+    }
+
+    window.addEventListener("load", initEuropeMap);
+
+    </script>
+
+</body>
+</html>

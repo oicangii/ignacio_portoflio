@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ignacio Guzmán – Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600&family=Inter:wght@200;300;400;500;600;700&family=Lora:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+
+    <style>
+
+        :root {
+            --bg-color: #ffffff;
+            --text-main: rgb(18, 18, 24);
+            --text-muted: rgb(68, 69, 76);
+            --border-color: rgb(224, 226, 230);
+            --surface-color: rgb(237, 238, 241);
+            --page-margin: clamp(24px, 5vw, 70px);
+            --edge-margin: clamp(16px, 5vw, 70px);
+            --header-edge: 4vw;
+            --header-title-width: 8vw;
+            --header-gap: 58vw;
+            --header-nav-width: 26vw;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            min-width: 320px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: repeating-linear-gradient(
+                to right,
+                transparent 0,
+                transparent 5px,
+                rgba(210, 210, 210, 0.11) 5px,
+                rgba(210, 210, 210, 0.11) 6px
+            );
+            color: var(--text-main);
+            font-family: "Inter", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           CABECERA
+        ========================= */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 20;
+
+            display: grid;
+            grid-template-columns: var(--header-edge) var(--header-title-width) var(--header-gap) var(--header-nav-width) var(--header-edge);
+            align-items: center;
+
+            width: 100%;
+            padding: 55px 0 25px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-main);
+            flex-shrink: 0;
+            grid-column: 2;
+            width: var(--header-title-width);
+        }
+
+        .logo-icon {
+            width: 26px;
+            height: 26px;
+            background-color: var(--text-main);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .logo-name {
+            font-family: "Instrument Sans", sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            white-space: nowrap;
+        }
+
+        /* =========================
+           MENÚ
+        ========================= */
+
+        nav {
+            grid-column: 4;
+            width: var(--header-nav-width);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: clamp(14px, 1.8vw, 24px);
+            align-items: center;
+            white-space: nowrap;
+            width: 100%;
+            justify-content: flex-end;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: clamp(8px, 0.8vw, 12px);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            transition: color 0.2s ease;
+            position: relative;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav ul li a:hover {
+            color: var(--text-main);
+        }
+
+        nav ul li a.active {
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        nav ul li a.active::after {
+            content: '';
+            display: block;
+            width: 4px;
+            height: 4px;
+            background-color: var(--text-main);
+            border-radius: 50%;
+            position: absolute;
+            bottom: -8px;
+        }
+
+        /* =========================
+           CURSOR PERSONALIZADO
+        ========================= */
+
+        .custom-cursor {
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 8px;
+            height: 8px;
+
+            background-color: #ffffff;
+
+            border-radius: 50%;
+
+            mix-blend-mode: difference;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transform: translate(-50%, -50%);
+
+            z-index: 1000;
+
+            transition: opacity 0.15s ease;
+        }
+
+        .custom-cursor::before {
+
+            content: '';
+
+            position: absolute;
+
+            inset: -6px;
+
+            border: 1px solid #ffffff;
+
+            border-radius: 50%;
+
+            mix-blend-mode: difference;
+        }
+
+        .custom-cursor.visible {
+
+            opacity: 1;
+        }
+
+        @media (pointer: fine) {
+
+            body,
+            body * {
+                cursor: none !important;
+            }
+        }
+
+        /* =========================
+           SECCIÓN DE PROYECTOS Y MAPA
+        ========================= */
+
+        .projects-section {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            padding: clamp(120px, 14vh, 160px) var(--page-margin) 60px;
+            background: #ffffff;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1.3fr 1fr; 
+            align-items: center;
+            gap: clamp(24px, 3vw, 44px);
+        }
+
+        .projects-intro {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-self: stretch;
+        }
+
+        .projects-intro h2 {
+            font-family: "Inter", sans-serif;
+            font-size: clamp(16px, 1.7vw, 24px);
+            line-height: 1;
+            font-weight: 300;
+            letter-spacing: 0;
+            white-space: nowrap;
+            margin-bottom: clamp(22px, 3vw, 40px);
+        }
+
+        .project-collage {
+            flex: 0 0 auto;
+            min-height: 0;
+            width: min(54vw, 100%);
+            height: min(74vh, 700px);
+            padding-bottom: 28px;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            grid-template-rows: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            position: relative;
+        }
+
+        .project-card {
+            min-width: 0;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            color: #121218;
+            background: transparent;
+            border: 1px solid var(--border-color); /* Borde muy fino gris */
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            isolation: isolate;
+        }
+
+        .project-card.is-expanded {
+            position: absolute;
+            grid-area: auto;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            width: auto;
+            height: auto;
+        }
+
+        .project-card.is-expanded .decathlon-shoe,
+        .project-card.is-expanded .project-hover-image {
+            opacity: 0 !important;
+            display: none;
+        }
+
+        .project-card-details {
+            display: none;
+            margin-top: 14px;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            color: #121218;
+            font-family: "Inter", sans-serif;
+        }
+
+        .project-card.is-expanded .project-card-details {
+            display: flex;
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        .project-detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .project-detail-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #687076;
+        }
+
+        .project-detail-value {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 1.4;
+            color: #121218;
+        }
+
+        .project-description {
+            font-size: 13px;
+            line-height: 1.4;
+            font-weight: 300;
+            color: #2d2e36;
+        }
+
+        .pdf-cover-container {
+            position: relative;
+            width: 100%;
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-top: 4px;
+            background: transparent;
+            overflow: hidden;
+        }
+
+        .pdf-cover-container a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 100%;
+            max-height: 100%;
+            height: 100%;
+            background: #f1f5f9;   
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .pdf-cover-container a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            border-color: #cbd5e1;
+        }
+
+        .pdf-cover-container img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            object-fit: contain;
+        }
+
+        .project-expand-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 2;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            border: none;
+            border-radius: 50%;
+            background: #ffffff;
+            color: #A5B7C0;
+            font: inherit;
+            font-size: 0;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .project-expand-btn::before {
+            content: '\2197';
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .project-card.is-expanded .project-expand-btn::before {
+            content: '\00d7';
+            font-size: 25px;
+            font-weight: 900;
+        }
+
+        .project-card-close {
+            display: none;
+        }
+
+        .project-number {
+            width: fit-content;
+            max-width: 100%;
+            min-height: 26px;
+            padding: 6px;
+            align-self: flex-start;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            background: #ffffff;
+            border-radius: 8px;
+            font-family: sans-serif;
+            font-size: 13px;
+            font-weight: 200;
+            line-height: 1;
+            letter-spacing: 0.03em;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .project-card strong {
+            font-family: "Nunito Sans", sans-serif;
+            font-size: clamp(13px, 1.2vw, 19px);
+            line-height: 1.2;
+            font-weight: 200; 
+            color: #000000; /* Se mantiene negro siempre */
+            margin-top: 8px;
+        }
+
+        .project-card:hover strong,
+        .project-card.is-expanded strong {
+            font-weight: 200;
+            color: #000000; /* Asegura que no cambie a blanco al hacer hover */
+        }
+
+        .decathlon-shoe,
+        .project-hover-image {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 1; /* Visible desde el primer momento */
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .project-card > *:not(.decathlon-shoe):not(.project-hover-image):not(.project-expand-btn) {
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-card:hover .decathlon-shoe,
+        .project-card:hover .project-hover-image {
+            opacity: 1;
+        }
+
+        .project-card-placeholder {
+            min-width: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* =========================
+           PANEL DEL MAPA
+        ========================= */
+
+        .map-panel {
+            min-width: 0;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        #europe-map {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            touch-action: none;
+            user-select: none;
+        }
+
+        #europe-map svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .europe-country {
+            fill: #e2e8f0;
+            stroke: #ffffff;
+            stroke-width: 0.9px;
+            stroke-linejoin: round;
+            stroke-linecap: round;
+            transition: fill 0.2s ease, stroke 0.2s ease, filter 0.2s ease;
+        }
+
+        .europe-country.featured-country {
+            fill: #cbd5e1;
+        }
+
+        .europe-country.country-highlighted {
+            fill: #404650 !important;
+            stroke: #1e293b !important;
+            stroke-width: 1.5px !important;
+            filter: drop-shadow(0 0 8px rgba(64, 70, 80, 0.6));
+            opacity: 1 !important;
+        }
+
+        .project-card.is-expanded .project-detail-item:last-child {
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card.is-expanded .pdf-cover-container a {
+            flex: 0 0 auto;
+            display: flex;
+            width: var(--pdf-link-width) !important;
+            height: var(--pdf-link-height) !important;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .project-card.is-expanded .pdf-cover-container img {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            object-position: left center;
+        }
+
+        .project-card.is-expanded .pdf-cover-container.has-side-photo {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 12px;
+            align-items: center;
+        }
+
+        .project-card.is-expanded .pdf-cover-container.has-side-photo > a {
+            width: auto !important;
+            height: 100% !important;
+            min-width: 0;
+        }
+
+        .project-card.is-expanded .pdf-cover-container.has-side-photo > img.project-side-photo {
+            width: 100%;
+            height: 100%;
+            min-width: 0;
+            object-fit: contain;
+            object-position: center;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 900px) {
+            header {
+                display: grid;
+                grid-template-columns: 1fr auto;
+                padding: 24px var(--edge-margin) 20px;
+            }
+            .logo-container, nav, nav ul {
+                width: auto;
+                grid-column: auto;
+            }
+            .logo-name { display: none; }
+            .projects-section {
+                height: auto;
+                min-height: 100svh;
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding-top: 110px;
+            }
+            .map-panel {
+                min-height: 520px;
+            }
+            #europe-map {
+                min-height: 430px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            nav ul li a { font-size: 8px; }
+            .projects-section { padding-left: 20px; padding-right: 20px; }
+            .project-collage { height: 470px; }
+        }
+
+        
+
+        #project-decathlon.is-expanded strong {
+            color: #000000;
+        }
+        
+        .project-date {
+            font-size: 0.85em;
+            font-style: italic;
+            font-weight: 200;
+        }
+
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+</head>
+
+<body>
+
+    <div class="custom-cursor" id="customCursor" aria-hidden="true"></div>
+
+    <!-- =========================
+         CABECERA
+    ========================= -->
+    <header>
+        <a href="#" class="logo-container">
+            <div class="logo-icon">I</div>
+            <span class="logo-name">Ignacio Guzmán</span>
+        </a>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="index.html#projects">PROJECTS</a></li>
+                <li><a href="experience.html">EXPERIENCE</a></li>
+                <li><a href="education.html" class="active">EDUCATION</a></li>
+                <li><a href="#about">ABOUT ME</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- =========================
+         SECCIÓN DE PROYECTOS Y MAPA
+    ========================= -->
+    <section class="projects-section" id="projects" aria-labelledby="projects-title">
+        <div class="projects-intro">
+            <h2 id="projects-title">EDUCATION</h2>
+
+            <div class="project-collage">
+                <!-- PROYECTO 1: DECATHLON -->
+                <!-- PROYECTO 1: DECATHLON -->
+                <article class="project-card" id="project-decathlon">
+                    <span class="project-number">Erasmus University of Rotterdam</span>
+                    <strong><b>Master's in Marketing Analytics & Data Science | Rotterdam, The Netherlands</b><br><span class="project-date">August 2023 - August 2024</span></strong>
+                    
+                    <img class="decathlon-shoe" src="fondo_uni_erasmus.png" alt="">
+                </article>
+
+                <!-- PROYECTO 2: UC3M -->
+                <article class="project-card" id="project-uc3m">
+                    <span class="project-number">Universidad Carlos III</span>
+                    <strong><b>Bachelor's in Business Administration | Madrid, Spain</b><br><span class="project-date">September 2018 - July 2022</span></strong>
+                    
+                    
+                    <img class="project-hover-image" src="fondo_uni_uc3m.png" alt="">
+                </article>
+
+                <!-- PROYECTO 3: ERASMUS UNIVERSITY -->
+                <article class="project-card" id="project-erasmus">
+                    <span class="project-number">Latvijas Universitate</span>
+                    <strong><b>Erasmus Exchange Program (6 months) | Riga, Latvia </b><br><span class="project-date">September 2021 - January 2021</span></strong>
+                    
+                
+                    <img class="project-hover-image" src="fondo_uni_latvia.png" alt="">
+                </article>
+            </div>
+        </div>
+        
+        <div class="map-panel" id="atlasBox" aria-label="Mapa de Europa">
+            <div id="europe-map"></div>
+        </div>
+    </section>
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+    <script>
+        const customCursor = document.getElementById('customCursor');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        // Mapeo de proyectos a códigos ISO de países
+        const projectCountryMap = {
+            "project-decathlon": "528", // Países Bajos
+            "project-uc3m": "724",      // España
+            "project-erasmus": "428"    // Letonia
+        };
+
+        window.addEventListener('pointermove', (e) => {
+            customCursor.style.left = `${e.clientX}px`;
+            customCursor.style.top = `${e.clientY}px`;
+            customCursor.classList.add('visible');
+        });
+
+        const europeanIsoCodes = new Set([
+            "724", "250", "620", "276", "380", "826", "372", "528",
+            "056", "756", "040", "616", "203", "703", "348", "642",
+            "100", "300", "578", "752", "246", "208", "233", "428",
+            "440", "112", "804", "191", "705", "070", "688", "008",
+            "807", "499", "470", "020"
+        ]);
+
+        function filterCoordinates(coords) {
+            return coords.filter(([lon, lat]) => {
+                if (!Number.isFinite(lon) || !Number.isFinite(lat)) return false;
+                if (lat < 35 || lat > 70) return false;
+                if (lon < -25 || lon > 45) return false;
+                return true;
+            });
+        }
+
+        function removeExcludedParts(geometry) {
+            if (!geometry) return geometry;
+            if (geometry.type === "Polygon") {
+                return {
+                    ...geometry,
+                    coordinates: geometry.coordinates.map(ring => filterCoordinates(ring)).filter(ring => ring.length > 2)
+                };
+            }
+            if (geometry.type === "MultiPolygon") {
+                return {
+                    ...geometry,
+                    coordinates: geometry.coordinates.map(polygon => polygon.map(ring => filterCoordinates(ring)).filter(ring => ring.length > 2)).filter(polygon => polygon.length > 0)
+                };
+            }
+            return geometry;
+        }
+
+        async function initEuropeMap() {
+            const container = document.getElementById("europe-map");
+            const atlasBox = document.getElementById("atlasBox");
+            if (!container || !atlasBox) return;
+
+            const width = 800;
+            const height = 600;
+
+            const svg = d3.select(container)
+                .append("svg")
+                .attr("viewBox", `0 0 ${width} ${height}`)
+                .attr("preserveAspectRatio", "xMidYMid meet");
+
+            try {
+                const world = await d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json");
+                const rawFeatures = topojson.feature(world, world.objects.countries).features;
+
+                const countries = rawFeatures
+                    .filter(country => europeanIsoCodes.has(String(country.id).padStart(3, "0")))
+                    .map(feature => ({
+                        ...feature,
+                        geometry: removeExcludedParts(feature.geometry)
+                    }))
+                    .filter(feature => feature.geometry && feature.geometry.coordinates.length > 0);
+
+                const featureCollection = { type: "FeatureCollection", features: countries };
+                const projection = d3.geoConicConformal().center([10, 52]).parallels([35, 65]);
+                projection.fitExtent([[0, 0], [width, height]], featureCollection);
+
+                const path = d3.geoPath().projection(projection);
+                const featuredIsoCodes = new Set(["724", "528", "428", "578"]);
+
+                svg.append("g")
+                    .selectAll("path")
+                    .data(countries)
+                    .join("path")
+                    .attr("class", country => {
+                        const isoCode = String(country.id).padStart(3, "0");
+                        return featuredIsoCodes.has(isoCode) ? "europe-country featured-country" : "europe-country";
+                    })
+                    .attr("id", country => `country-${String(country.id).padStart(3, "0")}`)
+                    .attr("d", path);
+
+                Object.entries(projectCountryMap).forEach(([cardId, isoCode]) => {
+                    const card = document.getElementById(cardId);
+                    const country = document.getElementById(`country-${isoCode}`);
+
+                    if (card && country) {
+                        card.addEventListener("mouseenter", () => {
+                            country.parentNode.appendChild(country);
+                            country.classList.add("country-highlighted");
+                        });
+
+                        card.addEventListener("mouseleave", () => {
+                            country.classList.remove("country-highlighted");
+                        });
+                    }
+                });
+            } catch (error) {
+                console.error("No se pudo cargar el mapa:", error);
+            }
+        }
+
+        window.addEventListener("load", initEuropeMap);
+    </script>
+
+</body>
+</html>
