@@ -2063,6 +2063,15 @@
 
                 </button>
 
+                <button
+                    class="btn btn-secondary"
+                    id="openContactBtnHeader"
+                    style="cursor:pointer;">
+
+                    Contact
+
+                </button>
+
             </div>
 
             <div class="logos-container">
@@ -2530,7 +2539,10 @@
 
         const openBtn3 =
             document.getElementById('openContactBtn3');
-
+        
+        const openBtnHeader =
+            document.getElementById('openContactBtnHeader');
+        
         const closeBtn =
             document.getElementById('closeContactBtn');
 
@@ -2968,6 +2980,10 @@
 
         if (openBtn3) {
             openBtn3.addEventListener('click', showContact);
+        }
+
+        if (openBtnHeader) {
+            openBtnHeader.addEventListener('click', showContact);
         }
 
         if (closeBtn) {
